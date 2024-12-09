@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusDotNet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Tahoma;
+            background-color: #000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .background.show {
+            opacity: 1;
+        }
+
+        .hexagon-right, .hexagon-left {
+            position: absolute;
+            top: 10%;
+            width: 800px;
+            height: 700px;
+            background-color: rgba(255, 255, 255, 0.7);
+            clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+            z-index: -1;
+        }
+
+        .hexagon-right {
+            right: -30%;
+        }
+
+        .hexagon-left {
+            left: -30%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #111;
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #ffffff;
+            color: #0c0011;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #00ff00;
+            display: inline;
+            border-right: 2px solid;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #111;
+            z-index: 1;
+        }
+
+        footer p a {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background" id="background"></div>
+    <div class="hexagon-right"></div>
+    <div class="hexagon-left"></div>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="NexusDotNet Logo">
+            <span class="brand">NexusDotNet | Building the Future</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h1>NexusDotNet.</h1>
+            <p class="subtitle">
+                Crafting <span class="highlight typing-animation" id="rotating-text">Excellence</span>
+            </p>
+            <p class="description">
+                At NexusDotNet, we build modern, responsive websites that enhance your online presence and engage users.
+            </p>
+            <button class="learn-more">Learn more</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>PH: 0470424774 | Facebook: <a href="https://www.facebook.com/NexusDOTCom" target="_blank">/NexusDOTCom</a></p>
+    </footer>
+
+    <script>
+        const phrases = ["Excellence", "Brilliance", "Perfection", "Innovation", "Mastery", "Quality", "Ambition"];
+        let phraseIndex = 0;
+        const rotatingText = document.getElementById("rotating-text");
+
+        function rotatePhrase() {
+            rotatingText.classList.remove("typing-animation");
+            void rotatingText.offsetWidth;
+            rotatingText.classList.add("typing-animation");
+            rotatingText.textContent = phrases[phraseIndex];
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+        setInterval(rotatePhrase, 2000);
+
+        const images = [
+            'city1.jpg', 'city2.jpg', 'city3.jpg', 'city4.jpg', 'city5.jpg',
+            'city6.jpg', 'city7.jpg', 'city8.jpg', 'city9.jpg', 'city10.jpg'
+        ];
+        let imageIndex = 0;
+
+        function changeBackground() {
+            const background = document.getElementById('background');
+            background.classList.remove('show');
+            setTimeout(() => {
+                background.style.backgroundImage = `url(${images[imageIndex]})`;
+                background.classList.add('show');
+                imageIndex = (imageIndex + 1) % images.length;
+            }, 1000);
+        }
+
+        setInterval(changeBackground, 5000);
+        changeBackground(); // Initial call
+    </script>
+</body>
+</html>
